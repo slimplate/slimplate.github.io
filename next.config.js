@@ -6,5 +6,13 @@ const withNextra = require('nextra')({
 module.exports = withNextra({
   images: {
     unoptimized: true
+  },
+  rewrites: async () => {
+    return [
+      {
+        source: '/admin',
+        destination: '/admin.html'
+      }
+    ]
   }
 })
