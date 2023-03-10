@@ -1,0 +1,34 @@
+{
+  "engine": "github",
+  "collections": {
+    "page": {
+      "title": "Page",
+      "files": "/pages/**/*.mdx",
+      "filename": "/pages/${slug}.mdx",
+      "fields": [
+        {
+          "name": "title",
+          "label": "Title",
+          "validators": [
+            "required"
+          ]
+        },
+        {
+          "name": "content",
+          "label": "Body",
+          "type": "richtext",
+          "validators": [
+            "required"
+          ]
+        },
+        {
+          "name": "slug",
+          "label": "URL Slug",
+          "validators": [
+            "required"
+          ]
+        }
+      ]
+    }
+  }
+}
