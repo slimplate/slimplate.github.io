@@ -3,8 +3,8 @@
   "collections": {
     "page": {
       "title": "Page",
-      "files": "/pages/components/**/*.mdx",
-      "filename": "/pages/components/${slug}.mdx",
+      "files": "/pages/**/*.mdx",
+      "filename": "/pages/${slug}.mdx",
       "fields": [
         {
           "name": "title",
