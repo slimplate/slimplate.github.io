@@ -1,5 +1,11 @@
 {
   "index": "Introduction",
-  "articles": "Usage",
-  "quickstart": "Quick Start"
+    "-- Usage --": {
+    "type": "separator",
+    "title": "Usage"
+  },
+  "quickstart": "Quick Start",
+  "components": "Components",
+  "hooks": "Hooks",
+  "fields": "Fields"
 }
