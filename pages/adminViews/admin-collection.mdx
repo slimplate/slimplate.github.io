@@ -1,12 +1,11 @@
 ---
-title: Components
+title: Admin Collection
 ---
-
 # Admin Collection
+
 AdminCollection is a React component that takes in props such as `onSelect`, `projectName`, and `enableSync`. It also makes use of the `useSlimplate` hook to obtain the projects and status variables. The project variable is then assigned to the specific project indicated by projectName.
 
-
-```js copy showLineNumbers filename="PageCollection.jsx" /AdminCollection/
+```js
 import { useSlimplate,AdminCollection } from '@slimplate/react-flowbite-github'
 
 function PageCollection ({ params: { username, projectName, branch } }) {
@@ -21,13 +20,10 @@ function PageCollection ({ params: { username, projectName, branch } }) {
     />
   )
 }
-
 ```
-
 
 The component renders a table of collections within the specified project. The table has three columns: the first column shows the sync status of each collection, the second column shows the name of the collection, and the third column has a sync button to synchronize local changes with a remote Git repository.
 
 Each row in the table represents a collection within the project, and the collection's sync status is indicated by an icon in the first column. The collection name is displayed in the second column, and clicking on a row will call the onSelect function with the selected collection and project as arguments.
 
 If `enableSync` is false, the sync button and the corresponding column will not be rendered. The table has some custom styles applied to it, such as different text colors and backgrounds depending on the theme.
-

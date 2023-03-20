@@ -1,11 +1,11 @@
 ---
-title: Edit
+title: Admin Edit
 ---
 ## Admin Edit
-AdminEdit is a React component that takes in props such as `filename`, `collectionName`, `projectName`, and `onSubmit`. It also makes use of the `useSlimplate` hook to obtain the projects. 
 
+AdminEdit is a React component that takes in props such as `filename`, `collectionName`, `projectName`, and `onSubmit`. It also makes use of the `useSlimplate` hook to obtain the projects.
 
-```js copy showLineNumbers filename="PageEdit.jsx" /AdminEdit/
+```js
 function PageEdit ({ params: { username, projectName, branch, collection, filename } }) {
   const [, navigate] = useLocation()
 
@@ -33,11 +33,9 @@ function PageEdit ({ params: { username, projectName, branch, collection, filena
 
 ### Editing Aricles
 
-
-
 When editing articles, as long as you supply a filename to the article inside of your slimplate.json, it will check all fields specified inside of the `collections.fields` section and find all widgets that match the field's name.
 
-```json showLineNumbers copy filename=".slimplate.json" /name/
+```json
 {
   "collections": {
     "page": {
@@ -61,9 +59,8 @@ When editing articles, as long as you supply a filename to the article inside of
 ### Creating New Aricles
 
 Optionally, if you do not supply a filename, you can create an empty article template using the same `collection.fields`.
-  
 
-```js copy showLineNumbers filename="PageNew.jsx" /filename/
+```js
 function PageNew ({ params: { username, projectName, branch, collection } }) {
   const [, navigate] = useLocation()
 
