@@ -1,5 +1,5 @@
 ---
-title: Project
+title: Admin Project
 ---
 import { Callout } from 'nextra-theme-docs'
 
@@ -7,7 +7,7 @@ import { Callout } from 'nextra-theme-docs'
 
 AdminProject is a React component that takes in props such as `enableSync` and `onSelect`. It uses the useSlimplate hook to obtain the `usingMonoProject` variable.
 
-```js copy showLineNumbers filename="PageDashboard.jsx" /AdminProject/
+```js
 function PageDashboard () {
   const { usingMonoProject, monoProject } = useSlimplate()
 
@@ -24,22 +24,17 @@ function PageDashboard () {
 }
 ```
 
-
 It is important to know if usingMonoProject is true, the component renders the [AdminProjectMono](/adminViews/admin-project#adminprojectmono) component passing enableSync and onSelect props to it. If usingMonoProject is `false`, the component renders the [AdminProjectMulti](/adminViews/admin-project#adminprojectmulti) component which also passes the onSelect prop to it.
 
-
 ### AdminProjectMono
+
 Takes in props such as `enableSync` and `onSelect`. It uses the `useSlimplate` hook to obtain the `projects` and `status` variables. It also performs a one-time setup of the Git repository for the specified userName and projectName. The purpose of this component is to render the admin collection for a mono-repo project.
 
-```js copy showLineNumbers /AdminProjectMono/
+```js
 <AdminProjectMono enableSync onSelect(console.log))} />
 ```
 
-<Callout type="warning" emoji="⚠️">
-  <p>If enabling `enableSync`, we display a sync button to synchronize local changes with a remote Git repository. </p>
-  <p>This will allow you to both pull and push all changes.</p>
-</Callout>
-
+<Callout type='warning' emoji='⚠️' />
 
 ### AdminProjectMulti
 
@@ -47,6 +42,6 @@ The component renders a table of project information that is obtained from the p
 
 Takes in a prop `onSelect`. It uses the useSlimplate hook to obtain the `projects` and `status` variables.
 
-```js copy showLineNumbers /AdminProjectMulti/
+```js
 <AdminProjectMulti onSelect={console.log} />
 ```
