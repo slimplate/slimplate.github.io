@@ -13,7 +13,7 @@
   },
   
   "hooks": "Hooks",
-  "admin": "Admin Views",
+  "admin-views": "Admin Views",
   "modals": "Modals",
   "fields": "Fields"
 }
