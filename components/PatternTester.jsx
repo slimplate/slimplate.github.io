@@ -9,7 +9,6 @@ export default function PatternTester ({ pattern, children = '' }) {
   useEffect(() => {
     const matches = m.filter(f => minimatch(f, pat))
     setOut(matches.join('\n'))
-    console.log(matches)
   }, [pat, m])
 
   const onChangeM = e => setM(e.target.value.split('\n'))
