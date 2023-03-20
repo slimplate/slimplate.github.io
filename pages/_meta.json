@@ -1,11 +1,22 @@
 {
+  "-- Getting Started --": {
+    "type": "separator",
+    "title": "Getting Started"
+  },
   "index": "Introduction",
-    "-- Usage --": {
+  "quickstart": "Quick Start",
+  
+  "-- Components --": {
+    "type": "separator",
+    "title": "Components"
+  },
+  "adminViews": "Admin Views",
+
+  "-- Usage --": {
     "type": "separator",
     "title": "Usage"
   },
-  "quickstart": "Quick Start",
-  "components": "Components",
   "hooks": "Hooks",
   "fields": "Fields"
 }
+

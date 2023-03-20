@@ -1,0 +1,37 @@
+# Admin Content
+AdminContent is a React component that takes in props such as `collectionName`, `projectName`, `onCreate`, and `onSelect`. It also makes use of the `useSlimplate` hook to obtain the projects. 
+
+```js copy showLineNumbers filename="PageDashboard.jsx" /AdminContent/
+import { useSlimplate, AdminCollection } from '@slimplate/react-flowbite-github'
+
+function PageContent ({ params: { username, projectName, branch, collection } }) {
+  const [, navigate] = useLocation()
+  const d = useSlimplate()
+
+  if (
+    !Object.keys(d?.projects || {}).length ||
+    !d.projects[`${username}/${projectName}`] ||
+    !d.projects[`${username}/${projectName}`]?.collections[collection] ||
+    !d.status || !d.status[`${username}/${projectName}`]
+  ) {
+    return null
+  }
+
+  return (
+    <AdminContent
+      collectionName={collection}
+      projectName={`${username}/${projectName}`}
+      onCreate={() => navigate(`/new/${username}/${projectName}/${branch}/${collection}`)}
+      onSelect={f => navigate(`/${username}/${projectName}/${branch}/${collection}${f.filename}`)}
+    />
+  )
+}
+```
+
+
+The component renders a table of content articles within the specified collection. The table has three columns: the first column shows the sync status of each content article, the second column shows the name of the article based on that collections `titleField` which falls back to `title` which then falls back to the `filename` of the article, and the third column has a delete button to delete local changes with a remote Git repository.
+
+There is also a `New` button that allows a user to create a brand new content article with components/inputs specified in the collection's fields section.
+
+![Admin Content](/admin-content.png)
+

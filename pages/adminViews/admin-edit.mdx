@@ -1,0 +1,81 @@
+## Admin Edit
+AdminEdit is a React component that takes in props such as `filename`, `collectionName`, `projectName`, and `onSubmit`. It also makes use of the `useSlimplate` hook to obtain the projects. 
+
+
+```js copy showLineNumbers filename="PageEdit.jsx" /AdminEdit/
+function PageEdit ({ params: { username, projectName, branch, collection, filename } }) {
+  const [, navigate] = useLocation()
+
+  const d = useSlimplate()
+
+  if (
+    !Object.keys(d?.projects || {}).length ||
+    !d.projects[`${username}/${projectName}`] ||
+    !d.projects[`${username}/${projectName}`]?.collections[collection] ||
+    !d.status || !d.status[`${username}/${projectName}`]
+  ) {
+    return null
+  }
+
+  return (
+    <AdminEdit
+      filename={`/${filename}`}
+      collectionName={collection}
+      projectName={`${username}/${projectName}`}
+      onSubmit={f => navigate(`/${username}/${projectName}/${branch}/${collection}`)}
+    />
+  )
+}
+```
+
+### Editing Aricles
+
+
+
+When editing articles, as long as you supply a filename to the article inside of your slimplate.json, it will check all fields specified inside of the `collections.fields` section and find all widgets that match the field's name.
+
+```json showLineNumbers copy filename=".slimplate.json" /name/
+{
+  "collections": {
+    "page": {
+      "title": "Page",
+      "files": "/pages/**/*.mdx",
+      "fields": [
+        {
+          "name": "content",
+          "label": "Body",
+          "type": "richtext",
+          "validators": [
+            "required"
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+![Admin Edit](/admin-edit.png)
+
+
+### Creating New Aricles
+
+Optionally, if you do not supply a filename, you can create an empty article template using the same `collection.fields`.
+  
+
+```js copy showLineNumbers filename="PageNew.jsx" /filename/
+function PageNew ({ params: { username, projectName, branch, collection } }) {
+  const [, navigate] = useLocation()
+
+  return (
+    <AdminEdit
+      filename
+      collectionName={collection}
+      projectName={`${username}/${projectName}`}
+      onSubmit={f => navigate(`/${username}/${projectName}/${branch}/${collection}`)}
+    />
+  )
+}
+```
+
+![Admin Edit New](/admin-edit-new.png)
+
