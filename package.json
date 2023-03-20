@@ -16,6 +16,7 @@
   },
   "homepage": "https://github.com/notnullgames/notnullgames.github.io#readme",
   "dependencies": {
+    "minimatch": "^7.4.2",
     "next": "^13.0.6",
     "nextra": "latest",
     "nextra-theme-docs": "latest",

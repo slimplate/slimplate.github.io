@@ -18,6 +18,7 @@
     "title": "Usage"
   },
   "hooks": "Hooks",
-  "fields": "Fields"
+  "fields": "Fields",
+  "glob": "Glob Patterns"
 }
 
