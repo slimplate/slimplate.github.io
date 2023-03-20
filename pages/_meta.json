@@ -5,20 +5,16 @@
   },
   "index": "Introduction",
   "quickstart": "Quick Start",
+  "configuration": "Configuration",
   
-  "-- Components --": {
-    "type": "separator",
-    "title": "Components"
-  },
-  "adminViews": "Admin Views",
-  "modals": "Modals",
-
   "-- Usage --": {
     "type": "separator",
     "title": "Usage"
   },
+  
   "hooks": "Hooks",
-  "fields": "Fields",
-  "glob": "Glob Patterns"
+  "admin": "Admin Views",
+  "modals": "Modals",
+  "fields": "Fields"
 }
 

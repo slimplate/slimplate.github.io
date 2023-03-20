@@ -1,0 +1,183 @@
+import { Callout } from 'nextra-theme-docs'
+
+## Admin Project
+
+AdminProject is a React component that takes in props such as `enableSync` and `onSelect`. It uses the useSlimplate hook to obtain the `usingMonoProject` variable.
+
+```jsx
+function PageDashboard () {
+  const { usingMonoProject, monoProject } = useSlimplate()
+
+  const navURL = usingMonoProject
+    ? c => hashNavigate(`/${monoProject.userName}/${monoProject.projectName}/${monoProject.branch}/${c.name}`)
+    : c => hashNavigate(`/${c.full_name}/${c.branch?.name || c.branch}`)
+
+  return (
+    <AdminProject
+      enableSync={usingMonoProject}
+      onSelect={navURL}
+    />
+  )
+}
+```
+
+It is important to know if usingMonoProject is true, the component renders the [AdminProjectMono](/adminViews/admin-project#adminprojectmono) component passing enableSync and onSelect props to it. If usingMonoProject is `false`, the component renders the [AdminProjectMulti](/adminViews/admin-project#adminprojectmulti) component which also passes the onSelect prop to it.
+
+### AdminProjectMono
+
+Takes in props such as `enableSync` and `onSelect`. It uses the `useSlimplate` hook to obtain the `projects` and `status` variables. It also performs a one-time setup of the Git repository for the specified userName and projectName. The purpose of this component is to render the admin collection for a mono-repo project.
+
+```jsx
+<AdminProjectMono enableSync onSelect={console.log} />
+```
+
+<Callout type='warning' emoji='⚠️' />
+
+### AdminProjectMulti
+
+The component renders a table of project information that is obtained from the projects object. It also includes a button to open a modal to create a new project, and buttons to delete, sync, and view a project on GitHub. The onSelect function is used to handle clicks on project rows.
+
+Takes in a prop `onSelect`. It uses the useSlimplate hook to obtain the `projects` and `status` variables.
+
+```jsx
+<AdminProjectMulti onSelect={console.log} />
+```
+
+
+## Admin Collection
+
+AdminCollection is a React component that takes in props such as `onSelect`, `projectName`, and `enableSync`. It also makes use of the `useSlimplate` hook to obtain the projects and status variables. The project variable is then assigned to the specific project indicated by projectName.
+
+```jsx
+import { useSlimplate,AdminCollection } from '@slimplate/react-flowbite-github'
+
+function PageCollection ({ params: { username, projectName, branch } }) {
+  const [, navigate] = useLocation()
+  const { usingMonoProject } = useSlimplate()
+
+  return (
+    <AdminCollection
+      enableSync={usingMonoProject}
+      onSelect={c => navigate(`/${username}/${projectName}/${branch}/${c.name}`)}
+      projectName={`${username}/${projectName}`}
+    />
+  )
+}
+```
+
+The component renders a table of collections within the specified project. The table has three columns: the first column shows the sync status of each collection, the second column shows the name of the collection, and the third column has a sync button to synchronize local changes with a remote Git repository.
+
+Each row in the table represents a collection within the project, and the collection's sync status is indicated by an icon in the first column. The collection name is displayed in the second column, and clicking on a row will call the onSelect function with the selected collection and project as arguments.
+
+If `enableSync` is false, the sync button and the corresponding column will not be rendered. The table has some custom styles applied to it, such as different text colors and backgrounds depending on the theme.
+
+
+## Admin Content
+
+AdminContent is a React component that takes in props such as `collectionName`, `projectName`, `onCreate`, and `onSelect`. It also makes use of the `useSlimplate` hook to obtain the projects.
+
+```jsx
+import { useSlimplate, AdminCollection } from '@slimplate/react-flowbite-github'
+
+function PageContent ({ params: { username, projectName, branch, collection } }) {
+  const [, navigate] = useLocation()
+  const d = useSlimplate()
+
+  if (
+    !Object.keys(d?.projects || {}).length ||
+    !d.projects[`${username}/${projectName}`] ||
+    !d.projects[`${username}/${projectName}`]?.collections[collection] ||
+    !d.status || !d.status[`${username}/${projectName}`]
+  ) {
+    return null
+  }
+
+  return (
+    <AdminContent
+      collectionName={collection}
+      projectName={`${username}/${projectName}`}
+      onCreate={() => navigate(`/new/${username}/${projectName}/${branch}/${collection}`)}
+      onSelect={f => navigate(`/${username}/${projectName}/${branch}/${collection}${f.filename}`)}
+    />
+  )
+}
+```
+
+The component renders a table of content articles within the specified collection. The table has three columns: the first column shows the sync status of each content article, the second column shows the name of the article based on that collections `titleField` which falls back to the `filename` of the article, and the third column has a delete button to delete local changes with a remote Git repository.
+
+There is also a `New` button that allows a user to create a brand new content article with components/inputs specified in the collection's fields section.
+
+
+## Admin Edit
+
+AdminEdit is a React component that takes in props such as `filename`, `collectionName`, `projectName`, and `onSubmit`. It also makes use of the `useSlimplate` hook to obtain the projects.
+
+```jsx
+function PageEdit ({ params: { username, projectName, branch, collection, filename } }) {
+  const [, navigate] = useLocation()
+
+  const d = useSlimplate()
+
+  if (
+    !Object.keys(d?.projects || {}).length ||
+    !d.projects[`${username}/${projectName}`] ||
+    !d.projects[`${username}/${projectName}`]?.collections[collection] ||
+    !d.status || !d.status[`${username}/${projectName}`]
+  ) {
+    return null
+  }
+
+  return (
+    <AdminEdit
+      filename={`/${filename}`}
+      collectionName={collection}
+      projectName={`${username}/${projectName}`}
+      onSubmit={f => navigate(`/${username}/${projectName}/${branch}/${collection}`)}
+    />
+  )
+}
+```
+
+### Editing Aricles
+
+When editing articles, as long as you supply a filename to the article inside of your slimplate.json, it will check all fields specified inside of the `collections.fields` section and find all widgets that match the field's name.
+
+```json
+{
+  "collections": {
+    "page": {
+      "title": "Page",
+      "files": "/pages/**/*.mdx",
+      "fields": [
+        {
+          "name": "content",
+          "label": "Body",
+          "type": "richtext",
+          "validators": [
+            "required"
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+### Creating New Aricles
+
+Optionally, if you do not supply a filename, you can create an empty article template using the same `collection.fields`.
+
+```jsx
+function PageNew ({ params: { username, projectName, branch, collection } }) {
+  const [, navigate] = useLocation()
+
+  return (
+    <AdminEdit
+      filename
+      collectionName={collection}
+      projectName={`${username}/${projectName}`}
+      onSubmit={f => navigate(`/${username}/${projectName}/${branch}/${collection}`)}
+    />
+  )
+}
+```
