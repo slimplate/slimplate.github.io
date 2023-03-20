@@ -5,7 +5,7 @@ title: Admin Edit
 
 AdminEdit is a React component that takes in props such as `filename`, `collectionName`, `projectName`, and `onSubmit`. It also makes use of the `useSlimplate` hook to obtain the projects.
 
-```js
+```jsx
 function PageEdit ({ params: { username, projectName, branch, collection, filename } }) {
   const [, navigate] = useLocation()
 
@@ -60,7 +60,7 @@ When editing articles, as long as you supply a filename to the article inside of
 
 Optionally, if you do not supply a filename, you can create an empty article template using the same `collection.fields`.
 
-```js
+```jsx
 function PageNew ({ params: { username, projectName, branch, collection } }) {
   const [, navigate] = useLocation()
 

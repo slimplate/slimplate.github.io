@@ -7,7 +7,7 @@ import { Callout } from 'nextra-theme-docs'
 
 AdminProject is a React component that takes in props such as `enableSync` and `onSelect`. It uses the useSlimplate hook to obtain the `usingMonoProject` variable.
 
-```js
+```jsx
 function PageDashboard () {
   const { usingMonoProject, monoProject } = useSlimplate()
 
@@ -30,7 +30,7 @@ It is important to know if usingMonoProject is true, the component renders the [
 
 Takes in props such as `enableSync` and `onSelect`. It uses the `useSlimplate` hook to obtain the `projects` and `status` variables. It also performs a one-time setup of the Git repository for the specified userName and projectName. The purpose of this component is to render the admin collection for a mono-repo project.
 
-```js
+```jsx
 <AdminProjectMono enableSync onSelect(console.log))} />
 ```
 
@@ -42,6 +42,6 @@ The component renders a table of project information that is obtained from the p
 
 Takes in a prop `onSelect`. It uses the useSlimplate hook to obtain the `projects` and `status` variables.
 
-```js
+```jsx
 <AdminProjectMulti onSelect={console.log} />
 ```
