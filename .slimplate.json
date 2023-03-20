@@ -3,22 +3,7 @@
   "collections": {
     "page": {
       "title": "Page",
-      "files": "/pages/[!adminViews]*.mdx",
-      "fields": [
-        {
-          "name": "content",
-          "label": "Body",
-          "type": "richtext",
-          "validators": [
-            "required"
-          ]
-        }
-      ]
-    },
-    "AdminViews": {
-      "title": "AdminViews",
-      "titleField": "title",
-      "files": "/pages/adminViews/*.mdx",
+      "files": "/pages/**/*.mdx",
       "fields": [
         {
           "name": "title",
