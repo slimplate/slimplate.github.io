@@ -31,7 +31,7 @@ It is important to know if usingMonoProject is true, the component renders the [
 Takes in props such as `enableSync` and `onSelect`. It uses the `useSlimplate` hook to obtain the `projects` and `status` variables. It also performs a one-time setup of the Git repository for the specified userName and projectName. The purpose of this component is to render the admin collection for a mono-repo project.
 
 ```jsx
-<AdminProjectMono enableSync onSelect(console.log))} />
+<AdminProjectMono enableSync onSelect={console.log} />
 ```
 
 <Callout type='warning' emoji='⚠️' />
