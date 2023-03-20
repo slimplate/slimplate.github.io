@@ -32,9 +32,6 @@ Takes in props such as `enableSync` and `onSelect`. It uses the `useSlimplate` h
 <AdminProjectMono enableSync onSelect(console.log))} />
 ```
 
-![Admin Collection](/admin-collection.png)
-
-
 <Callout type="warning" emoji="⚠️">
   <p>If enabling `enableSync`, we display a sync button to synchronize local changes with a remote Git repository. </p>
   <p>This will allow you to both pull and push all changes.</p>
@@ -50,8 +47,3 @@ Takes in a prop `onSelect`. It uses the useSlimplate hook to obtain the `project
 ```js copy showLineNumbers /AdminProjectMulti/
 <AdminProjectMulti onSelect={console.log} />
 ```
-
-
-![Admin Project](/admin-project.png)
-
-
