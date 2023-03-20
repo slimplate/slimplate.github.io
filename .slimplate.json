@@ -14,6 +14,20 @@
           ]
         }
       ]
+    },
+    "Admin Views": {
+      "title": "Admin Views",
+      "files": "/pages/adminViews/*.mdx",
+      "fields": [
+        {
+          "name": "content",
+          "label": "Body",
+          "type": "richtext",
+          "validators": [
+            "required"
+          ]
+        }
+      ]
     }
   }
 }

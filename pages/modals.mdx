@@ -1,0 +1,42 @@
+## Modal New Project
+
+The ModalNewProject component can be used to display a modal allowing you to select a Github repo. The project can be either private or public.
+
+
+```js copy filename="jsx" /AdminCollection/
+import { ModalNewProject } from '@slimplate/react-flowbite-github'
+
+const [showProjectModal, setShowProjectModal] = useState(false)
+return (
+  <ModalNewProject show={!!showProjectModal} onCancel={() => setShowProjectModal(false)} />
+)
+```
+
+
+## Modal Dialog Delete
+
+The Modal Dialog Delete component allows you to delete a project.
+
+```js copy filename="jsx" /AdminCollection/
+const { projects, setProjects, user, fs, token, corsProxy, status } = useSlimplate()
+const [showProjectModal, setShowProjectModal] = useState(false)
+const [projectToDelete, setProjectToDelete] = useState(false)
+
+const handleDeleteProject = async () => {
+  setProjectToDelete(false)
+  const p = { ...projects }
+  const git = new GithubProject(fs, p[projectToDelete], p[projectToDelete].default_branch, token, user, undefined, corsProxy)
+  delete p[projectToDelete]
+  await git.rm('')
+  setProjects(p)
+}
+
+return (
+    <ModalDialogDelete
+      show={!!projectToDelete}
+      onClose={() => setProjectToDelete(false)}
+      onConfirm={handleDeleteProject}
+      text={`Are you sure you want to delete ${projectToDelete} project?`}
+    />
+)
+```
