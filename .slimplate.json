@@ -15,8 +15,8 @@
         }
       ]
     },
-    "Admin Views": {
-      "title": "Admin Views",
+    "AdminViews": {
+      "title": "AdminViews",
       "files": "/pages/adminViews/*.mdx",
       "fields": [
         {
