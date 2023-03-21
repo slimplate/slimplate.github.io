@@ -1,3 +1,6 @@
+---
+title: Admin Project
+---
 import { Callout } from 'nextra-theme-docs'
 
 ## Admin Project
@@ -43,7 +46,6 @@ Takes in a prop `onSelect`. It uses the useSlimplate hook to obtain the `project
 <AdminProjectMulti onSelect={console.log} />
 ```
 
-
 ## Admin Collection
 
 AdminCollection is a React component that takes in props such as `onSelect`, `projectName`, and `enableSync`. It also makes use of the `useSlimplate` hook to obtain the projects and status variables. The project variable is then assigned to the specific project indicated by projectName.
@@ -70,7 +72,6 @@ The component renders a table of collections within the specified project. The t
 Each row in the table represents a collection within the project, and the collection's sync status is indicated by an icon in the first column. The collection name is displayed in the second column, and clicking on a row will call the onSelect function with the selected collection and project as arguments.
 
 If `enableSync` is false, the sync button and the corresponding column will not be rendered. The table has some custom styles applied to it, such as different text colors and backgrounds depending on the theme.
-
 
 ## Admin Content
 
@@ -106,7 +107,6 @@ function PageContent ({ params: { username, projectName, branch, collection } })
 The component renders a table of content articles within the specified collection. The table has three columns: the first column shows the sync status of each content article, the second column shows the name of the article based on that collections `titleField` which falls back to the `filename` of the article, and the third column has a delete button to delete local changes with a remote Git repository.
 
 There is also a `New` button that allows a user to create a brand new content article with components/inputs specified in the collection's fields section.
-
 
 ## Admin Edit
 
