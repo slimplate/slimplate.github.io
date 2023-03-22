@@ -4,8 +4,6 @@ title: Fields
 ---
 Widgets can be added through the slimplateProvider
 
-sadasda
-
 ```jsx
  <SlimplateProvider
     widgets={widgets}
@@ -17,14 +15,36 @@ sadasda
   </SlimplateProvider>
 ```
 
-We also offer a few default widgets which you can import\
-
+We also offer a few default widgets which you can import.
 
 ```jsx
 import {widgets } from '@slimplate/react-flowbite-github'
 ```
 
-\
-\
-\## Default Widgets\
- 
+AdminEdit then uses widgets to create form inputs for each field type in the collection.
+
+```jsx
+ "collections": {
+    "page": {
+      "title": "Page",
+      "files": "/pages/**/*.mdx",
+      "fields": [
+        {
+          "name": "title",
+          "label": "Title",
+          "validators": [
+            "required"
+          ]
+        },
+        {
+          "name": "content",
+          "label": "Body",
+          "type": "richtext",
+          "validators": [
+            "required"
+          ]
+        }
+      ]
+    }
+  }
+```
