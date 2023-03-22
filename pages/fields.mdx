@@ -2,8 +2,15 @@
 slug: fields
 title: Fields
 ---
-// How do i actually use these fields
+Widgets can be added through the slimplateProvider
 
-## Custom Widget
-
-## Widget Rich Text
+```jsx
+ <SlimplateProvider
+    widgets={widgets}
+    corsProxy={window?.slimplate?.corsProxy}
+    backendURL={window?.slimplate?.backendURL}
+    monoProject={window?.slimplate?.project}
+  >
+    <App />
+  </SlimplateProvider>
+```
