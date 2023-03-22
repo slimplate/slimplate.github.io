@@ -2,6 +2,8 @@
 slug: fields
 title: Fields
 ---
+## Adding Widgets
+
 Widgets can be added through the slimplateProvider, by default we offer a few which you can import.
 
 ```jsx
@@ -17,7 +19,7 @@ import {widgets } from '@slimplate/react-flowbite-github'
   </SlimplateProvider>
 ```
 
-The [AdminEdit](/admin-views#admin-edit) component then uses widgets to create form inputs for each field type in the articles slimplate.json collection obj. Important to note that fields without a type field will be treated as a string.
+The [AdminEdit](/admin-views#admin-edit) component then uses the widgets to create form inputs for each field type in the articles slimplate.json collection obj. Important to note that fields without a type field will be treated as a string.
 
 ```jsx
  "collections": {
@@ -44,6 +46,8 @@ The [AdminEdit](/admin-views#admin-edit) component then uses widgets to create f
     }
   }
 ```
+
+## Provided Default Widgets Types
 
 Here is a list of types we offer by default:
 
