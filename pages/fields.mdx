@@ -4,7 +4,6 @@ title: Fields
 ---
 ## Adding Widgets
 
-
 brandon
 
 Widgets can be added through the [slimplateProvider](/admin-views#admin-project), by default we offer a few [widgets](/fields#provided-default-widgets-types) which you can import.
@@ -24,7 +23,7 @@ import {widgets } from '@slimplate/react-flowbite-github'
 
 The [AdminEdit](/admin-views#admin-edit) component then uses the widgets to create form inputs for each field type in the articles slimplate.json collection obj. Important to note that fields without a type field will be treated as a string.
 
-```jsx
+```json
  "collections": {
     "page": {
       "title": "Page",
