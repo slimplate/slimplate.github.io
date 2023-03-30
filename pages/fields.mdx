@@ -36,12 +36,22 @@ Each `field` can have a specified `type` that determines the type of input widge
 
 The [AdminEdit](/admin-views#admin-edit) component uses the information provided in the fields array to render the appropriate input widgets for each field.
 
+## Default Field Types
+
+Here is a list of types we offer by default:
+
+*   `color`
+*   `date`
+*   `string`
+*   `number`
+*   `richtext`
+
 ## Adding Widgets
 
-Widgets can be added through the [SlimplateProvider](http://localhost:3000/admin-views#admin-project), by default we offer a few [widgets](/fields#provided-default-widgets-types) which you can import.
+Widgets can be added through the [SlimplateProvider](/provider), by default we offer a few [widgets](#default-field-types) which you can import.
 
 ```jsx
-import {widgets } from '@slimplate/react-flowbite-github'
+import { widgets } from '@slimplate/react-flowbite-github'
 
  <SlimplateProvider
     widgets={widgets}
@@ -53,12 +63,17 @@ import {widgets } from '@slimplate/react-flowbite-github'
   </SlimplateProvider>
 ```
 
-## Default Field Types
+### Custom Widgets
 
-Here is a list of types we offer by default:
+You can add your own named widgets, like this:
 
-*   color
-*   date
-*   string
-*   number
-*   richtext
+```jsx
+widgets.mine = ({ value, onChange }) => {
+  return 'DO YOUR STUFF!!!'
+}
+```
+
+Now, you have a `mine` field-type you can use in your `.slimplate.json`.
+
+
+

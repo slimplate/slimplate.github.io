@@ -5,13 +5,13 @@
   },
   "index": "Introduction",
   "quickstart": "Quick Start",
-  "configuration": "Configuration",
   
   "-- Usage --": {
     "type": "separator",
     "title": "Usage"
   },
-  
+  "configuration": "Configuration",
+  "provider": "Provider",
   "hooks": "Hooks",
   "admin-views": "Admin Views",
   "modals": "Modals",

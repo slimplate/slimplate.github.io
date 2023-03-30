@@ -2,25 +2,15 @@
 slug: hooks
 title: Hooks
 ---
+
 ## useSlimplate
 
-The SlimplateProvider provides the app with the necessary configuration and context to work with the Slimplate widgets and backend.
-
 ```jsx
- <SlimplateProvider
-    widgets={widgets}
-    corsProxy={window?.slimplate?.corsProxy}
-    backendURL={window?.slimplate?.backendURL}
-    monoProject={window?.slimplate?.project}
-  >
-    <App />
-  </SlimplateProvider>
+import { useSlimplate } from '@slimplate/react-flowbite-github'
+
+function MyThing() {
+  const { projects, status } = useSlimplate()
+
+  return (<pre>{JSON.stringify({ projects, status }, null, 2)}</pre>)
+}
 ```
-
-The `widgets` prop is an object that specifies a collection of input widgets.
-
-The `corsProxy` prop is an optional URL for a CORS proxy server.
-
-The `backendURL` prop is the URL of the backend server.
-
-The `monoProject prop` is an optional boolean value that indicates whether the app is a monorepo project or not.

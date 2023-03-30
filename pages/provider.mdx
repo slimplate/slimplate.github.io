@@ -1,0 +1,26 @@
+---
+slug: provider
+title: Provider
+---
+## SlimplateProvider
+
+The `SlimplateProvider` sets up the app with the necessary configuration and context to work with the Slimplate widgets and backend.
+
+```jsx
+ <SlimplateProvider
+    widgets={widgets}
+    corsProxy={window?.slimplate?.corsProxy}
+    backendURL={window?.slimplate?.backendURL}
+    monoProject={window?.slimplate?.project}
+  >
+    <App />
+  </SlimplateProvider>
+```
+
+The `widgets` prop is an object that specifies a collection of input widgets.
+
+The `corsProxy` prop is an optional URL for a CORS proxy server.
+
+The `backendURL` prop is the URL of the backend server.
+
+The `monoProject prop` is an optional boolean value that indicates whether the app is a monorepo project or not.
