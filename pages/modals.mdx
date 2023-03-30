@@ -3,20 +3,24 @@ title: Modals
 ---
 ## Modal New Project
 
-The ModalNewProject component can be used to display a modal allowing you to select a Github repo from any associated org.
+The `ModalNewProject` component can be used to display a modal allowing you to select a Github repo from any associated org.
 
 ```jsx
 import { ModalNewProject } from '@slimplate/react-flowbite-github'
 
 const [showProjectModal, setShowProjectModal] = useState(false)
 return (
-  <ModalNewProject show={!!showProjectModal} onCancel={() => setShowProjectModal(false)} />
+  <ModalNewProject show={!!showProjectModal} onClose={() => setShowProjectModal(false)} />
 )
 ```
 
+### Props
+  * `show` - display the modal
+  * `onCancel` - callback when the modal is closed
+
 ## Modal Dialog Delete
 
-The Modal Dialog Delete component allows you to delete a project.
+The `ModalDialogDelete` component allows you to delete a project.
 
 ```jsx
 const { projects, setProjects, user, fs, token, corsProxy, status } = useSlimplate()
@@ -41,3 +45,9 @@ return (
     />
 )
 ```
+
+### Props
+  * `show` - display the modal
+  * `onCancel` - callback when the modal is closed
+  * `onConfirm` - callback when the modal is confirmed
+  * `text` - prompt to display to user

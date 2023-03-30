@@ -3,7 +3,7 @@ title: Admin Views
 ---
 ## Admin Project
 
-AdminProject is a React component that takes in props such as `enableSync` and `onSelect`. It uses the useSlimplate hook to obtain the `usingMonoProject` variable.
+`AdminProject` is a React component that uses the `usingMonoProject` variable obtained from the `useSlimplate` hook to determine which admin component is best for displaying your project or projects.
 
 ```jsx
 function PageDashboard () {
@@ -22,7 +22,10 @@ function PageDashboard () {
 }
 ```
 
-It is important to know if usingMonoProject is true, the component renders the [AdminProjectMono](/adminViews/admin-project#adminprojectmono) component passing enableSync and onSelect props to it. If usingMonoProject is `false`, the component renders the [AdminProjectMulti](/adminViews/admin-project#adminprojectmulti) component which also passes the onSelect prop to it.
+### Props
+  * `enableSync` - An optional boolean to enable a syn project button.
+  * `onSelect` - Callback for when a project is selected.
+
 
 ### AdminProjectMono
 

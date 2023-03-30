@@ -7,20 +7,37 @@ title: Provider
 The `SlimplateProvider` sets up the app with the necessary configuration and context to work with the Slimplate widgets and backend.
 
 ```jsx
- <SlimplateProvider
+
+import { widgets, SlimplateProvider } from '@slimplate/react-flowbite-github'
+
+window.slimplate = {
+  project: {
+    userName: 'YOURS_HERE',
+    projectName: 'YOURS_HERE',
+    branch: 'YOURS_HERE'
+  },
+  corsProxy: 'YOURS_HERE',
+  backendURL: 'YOURS_HERE'
+}
+
+const widgets = {
+  ...widgets,
+  //...custom widgets here
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <SlimplateProvider
     widgets={widgets}
     corsProxy={window?.slimplate?.corsProxy}
     backendURL={window?.slimplate?.backendURL}
-    monoProject={window?.slimplate?.project}
-  >
+    monoProject={window?.slimplate?.project}>
     <App />
   </SlimplateProvider>
+)
 ```
 
-The `widgets` prop is an object that specifies a collection of input widgets.
-
-The `corsProxy` prop is an optional URL for a CORS proxy server.
-
-The `backendURL` prop is the URL of the backend server.
-
-The `monoProject prop` is an optional boolean value that indicates whether the app is a monorepo project or not.
+### Props
+  * `corsProxy` - An optional URL for a CORS proxy server.
+  * `backendURL` - The URL of the backend server.
+  * `monoProject` - Project setup for a monorepo project.
+  * `widgets` - A collection of input widgets. SlimplateProvider uses slimplate [widgets](/fields#what-are-fields) by default but can be customized.
