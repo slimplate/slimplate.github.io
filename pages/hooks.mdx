@@ -7,14 +7,14 @@ title: Hooks
 The SlimplateProvider provides the app with the necessary configuration and context to work with the Slimplate widgets and backend.
 
 ```jsx
- <SlimplateProvider
-    widgets={widgets}
-    corsProxy={window?.slimplate?.corsProxy}
-    backendURL={window?.slimplate?.backendURL}
-    monoProject={window?.slimplate?.project}
-  >
-    <App />
-  </SlimplateProvider>
+ <SlimplateProvider
+    widgets={widgets}
+    corsProxy={window?.slimplate?.corsProxy}
+    backendURL={window?.slimplate?.backendURL}
+    monoProject={window?.slimplate?.project}
+  >
+    <App />
+  </SlimplateProvider>
 ```
 
 The `widgets` prop is an object that specifies a collection of input widgets.
