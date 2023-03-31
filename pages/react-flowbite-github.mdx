@@ -1,10 +1,67 @@
 ---
-title: Components
-slug: components
+title: React Flowbite Github
+slug: react-flowbite-github
 ---
+## Introduction
 
-## Admin Views
+This is our library of useful react components, hooks, providers and widgets. Feel free to checkout our demo [here](https://github.com/slimplate/slimplate-next-template).
 
+## Installation
+
+1. Install by running the following command.
+```sh
+npm i slimplate/react-flowbite-github
+```
+
+2. Next add an import statement at the top of your file indicating which components you would like to use.
+```jsx
+import { useSlimplate } from '@slimplate/react-flowbite-github'
+```
+
+3. Wrap your application root component with [SlimplateProvider](/react-flowbite-github#slimplateprovider). As well as indicating your `corsProxy`, `backendURL`, and `monoProject`.
+```jsx
+
+window.slimplate = {
+  project: {
+    userName: 'YOURS_HERE',
+    projectName: 'YOURS_HERE',
+    branch: 'YOURS_HERE'
+  },
+  corsProxy: 'YOURS_HERE',
+  backendURL: 'YOURS_HERE'
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <SlimplateProvider
+    corsProxy={window?.slimplate?.corsProxy}
+    backendURL={window?.slimplate?.backendURL}
+    monoProject={window?.slimplate?.project}>
+    <App />
+  </SlimplateProvider>
+)
+```
+
+4. All set! You can now import and use Slimplate components or hooks anywhere in your application:
+
+```jsx
+import { useSlimplate, AdminProject } from '@slimplate/react-flowbite-github'
+
+function PageDashboard () {
+  const { usingMonoProject, monoProject } = useSlimplate()
+
+  const navURL = usingMonoProject
+    ? c => hashNavigate(`/${monoProject.userName}/${monoProject.projectName}/${monoProject.branch}/${c.name}`)
+    : p => hashNavigate(`/${p.full_name}/${p.branch?.name || p.branch}`)
+
+  return (
+    <AdminProject
+      enableSync={usingMonoProject}
+      onSelect={navURL}
+    />
+  )
+}
+```
+## Components
 
 ### Admin Project
 
@@ -197,7 +254,6 @@ function PageNew ({ params: { username, projectName, branch, collection } }) {
 }
 ```
 
-## Modals
 
 ### Modal New Project
 
@@ -249,3 +305,99 @@ return (
   * `onCancel` - callback when the modal is closed
   * `onConfirm` - callback when the modal is confirmed
   * `text` - prompt to display to user
+
+
+
+## Hooks
+
+### useSlimplate
+
+A hook to reach into the Slimplate context.
+
+```jsx
+import { useSlimplate } from '@slimplate/react-flowbite-github'
+
+function MyThing() {
+  const { projects, status } = useSlimplate()
+
+  return (<pre>{JSON.stringify({ projects, status }, null, 2)}</pre>)
+}
+```
+
+**variables**
+  * `widgets` - [Widgets](/configuration#what-are-widgets) object
+  * `status` - Status object for local filesystem compared to remote
+  * `user` - Github user
+  * `fs` - The local file system.
+  * `setUser` - Setter for the user.
+  * `token` - The GitHub token.
+  * `setToken` -  Setter for the GitHub token.
+  * `backendURL` - The backend URL address.
+  * `projects` - Projects object keyed by project name.
+  * `setProjects` - Setter for projects.
+  * `corsProxy` - Cors Proxy Address.
+  * `octokit` -  Access to octokit.
+  * `monoProject` - Boolean value for displaying mono / multi project admin.
+
+
+### useLocalStorage
+Hook that works simialr to useState, but persists in localStorage
+
+```jsx
+import { useLocalStorage } from '@slimplate/react-flowbite-github'
+
+const [user, setUser] = useLocalStorage('user', false)
+```
+
+### useFsUser
+Hook that works simialr to useState, but use JSON file in virtual filesystem
+
+```jsx
+import { useFsUser } from '@slimplate/react-flowbite-github'
+
+
+const [projects, setProjects] = useFsUser(fs, '/projects.json', {})
+```
+
+
+## Providers
+
+### SlimplateProvider
+
+The `SlimplateProvider` sets up the app with the necessary configuration and context to work with the Slimplate widgets and backend.
+
+```jsx
+
+import { widgets, SlimplateProvider } from '@slimplate/react-flowbite-github'
+
+window.slimplate = {
+  project: {
+    userName: 'YOURS_HERE',
+    projectName: 'YOURS_HERE',
+    branch: 'YOURS_HERE'
+  },
+  corsProxy: 'YOURS_HERE',
+  backendURL: 'YOURS_HERE'
+}
+
+const widgets = {
+  ...widgets,
+  //...custom widgets here
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <SlimplateProvider
+    widgets={widgets}
+    corsProxy={window?.slimplate?.corsProxy}
+    backendURL={window?.slimplate?.backendURL}
+    monoProject={window?.slimplate?.project}>
+    <App />
+  </SlimplateProvider>
+)
+```
+
+**Props**
+  * `corsProxy` - An optional URL for a CORS proxy server.
+  * `backendURL` - The URL of the backend server.
+  * `monoProject` - Project setup for a monorepo project.
+  * `widgets` - A collection of input widgets. SlimplateProvider uses slimplate [widgets](/configuration#what-are-widgets) by default but can be customized.

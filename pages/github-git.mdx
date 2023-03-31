@@ -1,0 +1,46 @@
+---
+slug: github-git
+title: Github Git
+---
+
+## Installation
+
+Represents a single git repo, in browser, from Github 
+
+```npm
+npm i slimplate/github-git
+```
+
+## Usage
+```jsx
+import GithubProject from '@slimplate/github-git'
+```
+  
+```jsx
+  const git = new GithubProject(fs, repo, branch, token, user, undefined, corsProxy)
+  await git.init()
+```
+You now have access to tons of great handlers like `push`, `pull` and `clone`. See @slimplate/github-git for more.
+
+  * `exists` - return true if the file/dir exists in filesystyem
+  * `init` - pull/clone a repo to local filesystem
+  * `getAuthUrl` - get the URL to this repo, but with username/password (for basic auth)
+  * `clone` - clone a repo
+  * `log` - get a git log
+  * `fetch` - fetches updates to remote
+  * `status` - gets a status for project
+  * `read` - get a single file from filesystem
+  * `write` - write a single file to filesystem
+  * `rm` - delete a file or dir, recursively, from filesystem
+  * `checkStatus` - check the status of the entire project
+  * `listServerRefs` - get a remote list of git refs
+  * `add` - git add a file
+  * `commit` - git commit local filesystem, message is a string-template
+  * `diff` - get diff between two commits
+  * `push` - git push from local filesystem
+  * `pull` - git pull to local filesystem
+  * `allFiles` - get a list of all files in local filesystem
+  * `glob` - get all the filenames that match a glob in local filesystem
+  * `mkdirp` - recursively makes a directory
+  * `fixCollection` - fill in any missing fields with reasonable defaults
+  * `parseCollection` - parse all content in a collection (from local filesystem)

@@ -5,14 +5,17 @@
   },
   "index": "Introduction",
   "quickstart": "Quick Start",
-  "packages": "Packages",
-  
-  "-- Usage --": {
-    "type": "separator",
-    "title": "Usage"
-  },
   "configuration": "Configuration",
-  "hooks-providers": "Hooks - Providers",
-  "components": "Components"
+
+    "-- Packages --": {
+    "type": "separator",
+    "title": "Packages"
+  },
+  "utils": "utils",
+  "cfghserver": "cfghserver",
+  "github-git": "github-git",
+  "admin-static": "admin-static",
+  "create-slimplate": "create-slimplate",
+  "react-flowbite-github": "react-flowbite-github"
 }
 

@@ -1,0 +1,82 @@
+---
+slug: utils
+title: Utils
+---
+
+## Introduction
+The utils package exports several useful utility functions you can use across your app.
+
+## Installation
+
+```sh
+npm install '@slimplate/utils'
+```
+
+## Usage
+
+### uuid
+`uuid` - Generates and returns a uuid.
+
+```jsx
+import { uuid } from '@slimplate/utils'
+
+const id = uuid()
+```
+
+### shortUuid
+`shortUuid` - Generates and returns a short uuid (mhvXdrZT4jP5T8vBxuvm75).
+
+```jsx
+import { shortUuid } from '@slimplate/utils'
+
+const shortID = shortUuid()
+```
+
+### dateFormat
+`dateFormat` - Formats a date into yyyy-mm-dd
+
+```jsx
+import { dateFormat } from '@slimplate/utils'
+const value = 'Fri Mar 31 2023 16:28:30 GMT-0400'
+const date = dateFormat(format, value)
+console.log(date) // 03-31-2023
+```
+
+### titleize
+`shortUuid` - Titlizes a string
+
+```jsx
+import { titleize } from '@slimplate/utils'
+
+const collection = {
+  name: 'blog'
+}
+const text = `New ${titleize(collection.name)}`
+console.log(text) // New Blog
+```
+
+### slugify
+`shortUuid` - Slugify a string
+
+```jsx
+import { slugify } from '@slimplate/utils'
+const collection = {
+  name: 'blog'
+}
+const text = slugify(`New Blog`)
+console.log(text) // new_blog
+```
+
+### tt
+`tt` - Access to [template-templates](https://github.com/konsumer/template-templates) features.
+
+```jsx
+import { tt } from '@slimplate/utils'
+
+const collection = {
+  date: '03-30-2023',
+  slug: 'cool-article'
+}
+const text = tt(`/content/blog/${date}-${slug}.md`, { ...collection })
+console.log(text) // /content/blog/03-30-2023-cool-article.md 
+```

@@ -11,72 +11,18 @@ Intall Slimplate by running the following command.
 ```
 npm init slimplate <MYPROJECT>
 ```
-
 You can leave off `<MYPROJECT` to be prompted for additional questions. 
 
 
+## Packages
 
+Feel free to check out our Slimplate packages that we currently have published on npm.
 
-## Installation
-
-Slimplate also offers its components and hooks seperatly.
-
-1. Install by running the following command.
-```sh
-npm i slimplate/react-flowbite-github
-```
-
-2. Next add an import statement at the top of your file indicating which components you would like to use.
-```jsx
-import { useSlimplate } from '@slimplate/react-flowbite-github'
-```
-
-3. Wrap your application root component with [SlimplateProvider](/hooks-providers#slimplateprovider). As well as indicating your `corsProxy`, `backendURL`, and `monoProject`.
-```jsx
-
-window.slimplate = {
-  project: {
-    userName: 'YOURS_HERE',
-    projectName: 'YOURS_HERE',
-    branch: 'YOURS_HERE'
-  },
-  corsProxy: 'YOURS_HERE',
-  backendURL: 'YOURS_HERE'
-}
-
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <SlimplateProvider
-    corsProxy={window?.slimplate?.corsProxy}
-    backendURL={window?.slimplate?.backendURL}
-    monoProject={window?.slimplate?.project}>
-    <App />
-  </SlimplateProvider>
-)
-```
-
-4. All set! You can now import and use Slimplate components or hooks anywhere in your application:
-
-```jsx
-import { useSlimplate, AdminProject } from '@slimplate/react-flowbite-github'
-
-function PageDashboard () {
-  const { usingMonoProject, monoProject } = useSlimplate()
-
-  const navURL = usingMonoProject
-    ? c => hashNavigate(`/${monoProject.userName}/${monoProject.projectName}/${monoProject.branch}/${c.name}`)
-    : p => hashNavigate(`/${p.full_name}/${p.branch?.name || p.branch}`)
-
-  return (
-    <AdminProject
-      enableSync={usingMonoProject}
-      onSelect={navURL}
-    />
-  )
-}
-```
+* [@slimplate/utils](/utils) - Helpful util library
+* [@slimplate/cfghserver](/cfghserver) - Cloudflare worker
+* [@slimplate/github-git](/github-git) - Single git repo, in browser, from Github
+* [@slimplate/admin-static](/admin-static) - Central CMS admin for github sites.
+* [@slimplate/create-slimplate](/create-slimplate) - CLI Wizard
+* [@slimplate/react-flowbite-github](/react-flowbite-github) - Core library
 
 The source files are also available to be cloned or downloaded from the official [Slimplate](https://github.com/slimplate) Github repository. Don’t forget to give it a star if you appreciate the project.
-
-
-
-
