@@ -1,0 +1,139 @@
+---
+title: Packages
+slug: packages
+---
+
+## Packages
+
+Here is a list of all Slimplate packages that we have published on npm.
+
+* [@slimplate/utils](/packages#slimplateutils) - Helpful util library
+* [@slimplate/cfghserver](/packages#slimplatecfghserver) - Cloudflare worker
+* [@slimplate/github-git](/packages#slimplategithub-git) - Single git repo, in browser, from Github
+* [@slimplate/admin-static](/packages#slimplateadmin-static) - Central CMS admin for github sites.
+* [@slimplate/create-slimplate](/packages#slimplatecreate-slimplate) - CLI Wizard
+* [@slimplate/react-flowbite-github](/packages#slimplatereact-flowbite-github) - Core library
+
+
+### @slimplate/utils
+#### Installation
+
+The utils package exports several useful utility functions you can use across your app.
+```npm
+npm install '@slimplate/utils'
+```
+#### Usage
+```jsx
+import { titleize } from '@slimplate/utils'
+```
+
+### @slimplate/cfghserver
+#### Installation
+
+This is a cloudflare worker that does 2 things:
+
+- Provide ouath callbacks for Github Auth
+- Proxy authenticated requests for github files
+
+If you are interested in a vercel version, [slimplate-next-template](https://github.com/slimplate/slimplate-next-template) which has this backend, and a frontend that uses it.
+
+#### Auth
+
+Add a Github OAuth app (under "Developer Settings") set the redirect URL to wherever this is deployed (`https://cfghserver.YOURNAME.workers.dev/api/github/callback`.)
+
+Edit secrets.json to look like this:
+
+```json
+{
+  "GITHUB_CLIENT": "YOURS",
+  "GITHUB_SECRET": "YOURS",
+  "REDIRECT_URLS": "http://localhost:5173/"
+}
+```
+
+`REDIRECT_URLS` is comma-seperated list, and it doesn't have to match GitHub's, just authorized URLs to redirect to (with oauth token.)
+
+Run `npm run deploy` for initial deployment.
+
+Then run `wrangler secret:bulk secrets.json` to push your secrtets to the worker.
+
+In your app, hit `https://cfghserver.YOURNAME.workers.dev/api/github?code=XXXX&redir=http%3A%2F%2Flocalhost%3A5173%2F&scope=WHATEVER` to get the oauth token (in get-param `gh`.) `code` comes from the oauth-flow, for the user. Read more [here](https://docs.github.com/en/developers/apps/building-oauth-apps/authorizing-oauth-apps).
+
+You can see example of using this for Github login [here](https://github.com/slimplate/slimplate-next-template)
+
+
+#### Proxy
+
+I am using ideas from [here](https://www.npmjs.com/package/@isomorphic-git/cors-proxy).
+
+In your app, use URLs like `https://cfghserver.YOURNAME.workers.dev/api/cors/github.com/slimplate/private-tester.git/info/refs`
+
+
+### @slimplate/github-git
+
+#### Installation
+
+Represents a single git repo, in browser, from Github 
+
+```npm
+npm i slimplate/github-git
+```
+
+#### Usage
+```jsx
+import GithubProject from '@slimplate/github-git'
+```
+  
+```jsx
+  const git = new GithubProject(fs, repo, branch, token, user, undefined, corsProxy)
+  await git.init()
+```
+You now have access to tons of great handlers like `push`, `pull` and `clone`. See @slimplate/github-git for more.
+
+
+### @slimplate/admin-static
+
+This is an example project using [vite](https://vitejs.dev/) & [react](https://reactjs.org/) with the UI in [tailwind](https://tailwindcss.com/)/[flowbite](https://flowbite.com/).
+
+Think of this as the central CMS admin for a bunch of [slimplate](https://github.com/slimplate) sites you have in github. It allows you to keep your content in github, and edit it, without a server-side component (you still need a CORS proxy, but that is it.)
+
+#### setup
+
+Deploy [cfghserver](https://github.com/slimplate/cfghserver) on cloudflare, or similar to [this](https://github.com/slimplate/slimplate-next-template/tree/main/pages/api) on vercel. it has a little setup in the README. This will handle github authentication & provide a CORS proxy.
+
+Install deps with `npm i`
+
+Add a line to .env that points to it:
+
+```
+VITE_GITHUB_BACKEND=https://mycfghserver.gummicube.workers.dev
+```
+
+Test locally with `npm start`
+
+Deploy with `npm run deploy`.
+
+
+### @slimplate/create-slimplate
+This is our CLI Wizard to best help get you started using Slimplate
+
+```jsx
+npm init slimplate <MYPROJECT>
+```
+
+You can leave off `<MYPROJECT` to be prompted for additional questions. 
+
+
+### @slimplate/react-flowbite-github
+
+This is our main library for components, hooks, providers, and widgets.
+
+#### Installation
+```npm
+npm i @slimplate/react-flowbite-github
+```
+
+#### Usage
+```jsx
+import { SlimplateProvider } from '@slimplate/react-flowbite-github'
+```

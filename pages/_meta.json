@@ -5,16 +5,14 @@
   },
   "index": "Introduction",
   "quickstart": "Quick Start",
+  "packages": "Packages",
   
   "-- Usage --": {
     "type": "separator",
     "title": "Usage"
   },
   "configuration": "Configuration",
-  "provider": "Provider",
-  "hooks": "Hooks",
-  "admin-views": "Admin Views",
-  "modals": "Modals",
-  "fields": "Fields"
+  "hooks-providers": "Hooks - Providers",
+  "components": "Components"
 }
 

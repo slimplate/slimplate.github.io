@@ -1,16 +1,156 @@
 ---
 title: Configuration
+slug: configuration
 ---
 import PatternTester from "../components/PatternTester.jsx"
 
-> **TODO**: put info about .slimplate.json here.
+
+## .slimplate.json
+This json object provides a basic schema for the Slimplate CMS. 
+
+```json
+{
+  "engine": "github",
+  "collections": {
+    "articles": {
+      "title": "Articles",
+      "files": "/content/articles/**/*.mdx",
+      "filename": "/content/articles/${slugify(name)}.mdx",
+      "titleField": "name",
+      "contentField": "description",
+      "fields": [
+        {
+          "name": "name",
+          "label": "Name",
+          "validators": [
+            "required"
+          ]
+        },
+        {
+          "name": "description",
+          "label": "Description",
+          "type": "richtext",
+          "validators": [
+            "required"
+          ]
+        },
+        {
+          "name": "location",
+          "label": "Location Description",
+          "type": "richtext"
+        }
+      ]
+    },
+  }
+}
+```
+**collections**
+  * `title` - The page title
+  * `filename` - Where files should be saved.
+  * `files` - Define the collection's files location.
+  * `titleField` - Define which field should be the title.
+  * `contentField` - Define which field should be the content.
+
+
+**fields**
+  * `name` - The field label
+  * `label` - The field label
+  * `type` - The field type (defines the widget) 
+  * `validators` - is optional and supports `reqired` and `disabled`
+
+### What are Fields?
+
+The fields array in each collection specifies inputs and validators for creating or editing articles. The [AdminEdit](/components#admin-edit) component uses this information to display corresponding input widgets.
+
+```json
+ "collections": {
+  "page": {
+    "title": "Page",
+    "files": "/pages/**/*.mdx",
+    "fields": [
+      {
+        "name": "title",
+        "label": "Title",
+        "validators": [
+          "required"
+        ]
+      },
+      {
+        "name": "content",
+        "label": "Body",
+        "type": "richtext",
+        "validators": [
+          "required"
+        ]
+      }
+    ]
+  }
+}
+```
+
+Each `field` can have a specified `type` that determines the type of input widget to be used. If no type is specified, the default is a text input widget. 
+
+#### Default Field Types
+
+*   `color`
+*   `date`
+*   `string`
+*   `number`
+*   `richtext`
+
+
+### What are Widgets?
+
+Widgets are our way of displaying components for a specific field-type. Widgets can be added through the [SlimplateProvider](/hooks-providers#slimplateprovider).
+
+```jsx
+import { widgets, SlimplateProvider } from '@slimplate/react-flowbite-github'
+
+window.slimplate = {
+  project: {
+    userName: 'YOURS_HERE',
+    projectName: 'YOURS_HERE',
+    branch: 'YOURS_HERE'
+  },
+  corsProxy: 'YOURS_HERE',
+  backendURL: 'YOURS_HERE'
+}
+
+const widgets = {
+  ...widgets,
+  //...custom widgets here
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <SlimplateProvider
+    widgets={widgets}
+    corsProxy={window?.slimplate?.corsProxy}
+    backendURL={window?.slimplate?.backendURL}
+    monoProject={window?.slimplate?.project}>
+    <App />
+  </SlimplateProvider>
+)
+```
+
+#### Custom Widgets
+
+You can add your own named widgets, like this:
+
+```jsx
+widgets.mine = ({ value, onChange }) => {
+  return 'DO YOUR STUFF!!!'
+}
+```
+
+Now, you have a `mine` field-type you can use in your `.slimplate.json`.
+
 
 
 ## Glob
 
-[Glob](https://en.wikipedia.org/wiki/Glob_\(programming\)) [patterns](https://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html) are used all over the configuration. hello
+[Glob](https://en.wikipedia.org/wiki/Glob_\(programming\)) [patterns](https://www.gnu.org/software/bash/manual/html_node/Pattern-Matching.html) are used all over the configuration.
 
-Here is a tester to see how your pattern will match files: 
+Here is a tester to see how your pattern will match files:
 
 <PatternTester pattern="/pages/**/*.mdx">
 /pages/_meta.json

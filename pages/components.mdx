@@ -1,0 +1,251 @@
+---
+title: Components
+slug: components
+---
+
+## Admin Views
+
+
+### Admin Project
+
+AdminProject uses the `usingMonoProject` variable obtained from the `useSlimplate` hook to determine which admin component is best for displaying your project or projects.
+
+```jsx
+
+function AdminProject ({ enableSync = false, onSelect }) {
+  const { usingMonoProject } = useSlimplate()
+
+  return usingMonoProject
+    ? <AdminProjectMono enableSync={enableSync} onSelect={onSelect} />
+    : <AdminProjectMulti onSelect={onSelect} />
+}
+```
+
+```jsx
+import { useSlimplate, AdminProject } from '@slimplate/react-flowbite-github'
+
+function PageDashboard () {
+  const { usingMonoProject, monoProject } = useSlimplate()
+
+  const navURL = usingMonoProject
+    ? c => hashNavigate(`/${monoProject.userName}/${monoProject.projectName}/${monoProject.branch}/${c.name}`)
+    : c => hashNavigate(`/${c.full_name}/${c.branch?.name || c.branch}`)
+
+  return (
+    <AdminProject
+      enableSync={usingMonoProject}
+      onSelect={navURL}
+    />
+  )
+}
+```
+
+**Props**
+  * `enableSync` - An optional boolean to enable a syn project button.
+  * `onSelect` - Callback for when a project is selected.
+
+
+### AdminProjectMono
+
+Uses the `useSlimplate` hook to obtain the `projects` and `status` variables. It also performs a one-time setup of the GithHub repository for the specified userName and projectName.
+
+**Props**
+  * `enableSync` - Enable the sync button 
+  * `onSelect` - Callback when the project is clicked
+
+
+### AdminProjectMulti
+
+The component renders a table of project information that is obtained from the projects object. It also includes a button that opens a modal to create a new project, and buttons to delete, sync, and view a project on GitHub. The onSelect function is used to handle clicks on project rows.
+
+**Props**
+  * `onSelect` - Callback when the project is clicked
+
+### Admin Collection
+
+This component displays a table of project collections with three columns showing sync status, name, and a sync button to update changes with a remote Git repository. Clicking a row calls onSelect with the selected collection and project. If enableSync is off, the sync button and column aren't shown.
+
+```jsx
+import { useSlimplate,AdminCollection } from '@slimplate/react-flowbite-github'
+
+function PageCollection ({ params: { username, projectName, branch } }) {
+  const [, navigate] = useLocation()
+  const { usingMonoProject } = useSlimplate()
+
+  return (
+    <AdminCollection
+      enableSync={usingMonoProject}
+      onSelect={c => navigate(`/${username}/${projectName}/${branch}/${c.name}`)}
+      projectName={`${username}/${projectName}`}
+    />
+  )
+}
+```
+
+**Props**
+  * `onSelect` - Callback when the project is clicked
+  * `projectName` - The Project name.
+  * `enableSync` - Should show sync button
+
+### Admin Content
+
+This component displays a table of articles from a specific collection. The table has three columns: the first column displays the sync status of each article, the second column displays the article's name based on the titleField of the collection (or the filename if there is no titleField), and the third column contains a delete button to remove local changes from a remote Git repository. Additionally, there is a New button that lets the user create a new article with inputs defined in the collection's fields section.
+
+```jsx
+import { useSlimplate, AdminCollection } from '@slimplate/react-flowbite-github'
+
+function PageContent ({ params: { username, projectName, branch, collection } }) {
+  const [, navigate] = useLocation()
+  const d = useSlimplate()
+
+  if (
+    !Object.keys(d?.projects || {}).length ||
+    !d.projects[`${username}/${projectName}`] ||
+    !d.projects[`${username}/${projectName}`]?.collections[collection] ||
+    !d.status || !d.status[`${username}/${projectName}`]
+  ) {
+    return null
+  }
+
+  return (
+    <AdminContent
+      collectionName={collection}
+      projectName={`${username}/${projectName}`}
+      onCreate={() => navigate(`/new/${username}/${projectName}/${branch}/${collection}`)}
+      onSelect={f => navigate(`/${username}/${projectName}/${branch}/${collection}${f.filename}`)}
+    />
+  )
+}
+```
+
+**Props**
+  * `projectName` - The Project name.
+  * `onCreate` - Callback when content is created.
+  * `onSelect` - Callback when the content is selected.
+  * `collectionName` - The desired collection.
+
+
+### Admin Edit
+
+AdminEdit is a React component that displays a form of inputs based on the collection's field types.
+
+```jsx
+function PageEdit ({ params: { username, projectName, branch, collection, filename } }) {
+  const [, navigate] = useLocation()
+
+  const d = useSlimplate()
+
+  if (
+    !Object.keys(d?.projects || {}).length ||
+    !d.projects[`${username}/${projectName}`] ||
+    !d.projects[`${username}/${projectName}`]?.collections[collection] ||
+    !d.status || !d.status[`${username}/${projectName}`]
+  ) {
+    return null
+  }
+
+  return (
+    <AdminEdit
+      filename={`/${filename}`}
+      collectionName={collection}
+      projectName={`${username}/${projectName}`}
+      onSubmit={f => navigate(`/${username}/${projectName}/${branch}/${collection}`)}
+    />
+  )
+}
+```
+
+**Props**
+  * `projectName` - The Project name.
+  * `collectionName` - The collection for the article that you are editing.
+  * `filename` - The filename for the article that you are editing. (If marked true, will create an empty article template using the same `collection.fields`.)
+  * `onSubmit` - Callback when the form is submitted.
+
+
+#### Editing Aricles
+
+To edit articles, include a filename in your slimplate.json and the AdminEdit component will search for widgets matching the field names specified in the `collections.fields` section.
+```json
+{
+  "fields": [
+    {
+      "name": "content",
+      "label": "Body",
+      "type": "richtext",
+      "validators": [
+        "required"
+      ]
+    }
+  ]
+}
+```
+
+#### Creating New Aricles
+
+```jsx
+function PageNew ({ params: { username, projectName, branch, collection } }) {
+  const [, navigate] = useLocation()
+
+  return (
+    <AdminEdit
+      filename
+      collectionName={collection}
+      projectName={`${username}/${projectName}`}
+      onSubmit={f => navigate(`/${username}/${projectName}/${branch}/${collection}`)}
+    />
+  )
+}
+```
+
+## Modals
+
+### Modal New Project
+
+The `ModalNewProject` component can be used to display a modal allowing you to select a Github repo from any associated org.
+
+```jsx
+import { ModalNewProject } from '@slimplate/react-flowbite-github'
+
+const [showProjectModal, setShowProjectModal] = useState(false)
+return (
+  <ModalNewProject show={!!showProjectModal} onClose={() => setShowProjectModal(false)} />
+)
+```
+
+**Props**
+  * `show` - display the modal
+  * `onCancel` - callback when the modal is closed
+
+### Modal Dialog Delete
+
+The `ModalDialogDelete` component allows you to delete a project.
+
+```jsx
+const { projects, setProjects, user, fs, token, corsProxy, status } = useSlimplate()
+const [showProjectModal, setShowProjectModal] = useState(false)
+const [projectToDelete, setProjectToDelete] = useState(false)
+
+const handleDeleteProject = async () => {
+  setProjectToDelete(false)
+  const p = { ...projects }
+  const git = new GithubProject(fs, p[projectToDelete], p[projectToDelete].default_branch, token, user, undefined, corsProxy)
+  delete p[projectToDelete]
+  await git.rm('')
+  setProjects(p)
+}
+
+return (
+    <ModalDialogDelete
+      show={!!projectToDelete}
+      onClose={() => setProjectToDelete(false)}
+      onConfirm={handleDeleteProject}
+      text={`Are you sure you want to delete ${projectToDelete} project?`}
+    />
+)
+```
+
+**Props**
+  * `show` - display the modal
+  * `onCancel` - callback when the modal is closed
+  * `onConfirm` - callback when the modal is confirmed
+  * `text` - prompt to display to user
