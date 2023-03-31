@@ -23,25 +23,25 @@ import GithubProject from '@slimplate/github-git'
   Check out the `GithubProject` code [here](https://github.com/slimplate/slimplate/blob/main/packages/github-git/src/index.js)
 
 **git handlers** 
-  * `exists` - return true if the file/dir exists in filesystyem
-  * `init` - pull/clone a repo to local filesystem
-  * `getAuthUrl` - get the URL to this repo, but with username/password (for basic auth)
-  * `clone` - clone a repo
-  * `log` - get a git log
-  * `fetch` - fetches updates to remote
-  * `status` - gets a status for project
-  * `read` - get a single file from filesystem
-  * `write` - write a single file to filesystem
-  * `rm` - delete a file or dir, recursively, from filesystem
-  * `checkStatus` - check the status of the entire project
-  * `listServerRefs` - get a remote list of git refs
-  * `add` - git add a file
-  * `commit` - git commit local filesystem, message is a string-template
-  * `diff` - get diff between two commits
-  * `push` - git push from local filesystem
-  * `pull` - git pull to local filesystem
-  * `allFiles` - get a list of all files in local filesystem
-  * `glob` - get all the filenames that match a glob in local filesystem
-  * `mkdirp` - recursively makes a directory
-  * `fixCollection` - fill in any missing fields with reasonable defaults
-  * `parseCollection` - parse all content in a collection (from local filesystem)
+  * `init` - Pulls or clones a repo to local filesystem
+  * `clone` - Clone a repo
+  * `fetch` - Fetches updates to remote
+  * `push` - Git push from local filesystem
+  * `pull` - Git pull to local filesystem
+  * `write: (filename, contents)` - Write a single file to filesystem
+  * `rm: (filepath, opts)` - Remove a file or dir, recursively, from filesystem
+  * `log` - Get a git log
+  * `status` - Get a status for the project
+  * `listServerRefs` - Get a remote list of git refs
+  * `read: (filename, encoding)` - Get a single file from filesystem
+  * `diff: (commitHash1, commitHash2)` - Get diff between two commits
+  * `glob: (glob)` - Get all the filenames that match a glob in local filesystem
+  * `allFiles: (rootDir, existing)` - Get a list of all files in local filesystem
+  * `getAuthUrl` - Get the URL to this repo, but with username/password (for basic auth)
+  * `exists: (filename)` - Returns true if the file/dir exists in filesystyem
+  * `checkStatus` - Check the status of the entire project
+  * `add: (filepath, opts)` - Git add a file
+  * `commit: (message, opts)` - Git commit local filesystem, message is a string-template
+  * `mkdirp: (dirname)` - Recursively makes a directory
+  * `fixCollection: (collection, name)` - Fill in any missing fields with reasonable defaults
+  * `parseCollection: (collection, name)` - Parse all content in a collection (from local filesystem)
