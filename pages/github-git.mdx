@@ -20,8 +20,9 @@ import GithubProject from '@slimplate/github-git'
   const git = new GithubProject(fs, repo, branch, token, user, undefined, corsProxy)
   await git.init()
 ```
-You now have access to tons of great handlers like `push`, `pull` and `clone`. See @slimplate/github-git for more.
+  Check out the `GithubProject` code [here](https://github.com/slimplate/slimplate/blob/main/packages/github-git/src/index.js)
 
+**git handlers** 
   * `exists` - return true if the file/dir exists in filesystyem
   * `init` - pull/clone a repo to local filesystem
   * `getAuthUrl` - get the URL to this repo, but with username/password (for basic auth)

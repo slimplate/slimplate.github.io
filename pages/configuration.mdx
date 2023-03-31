@@ -6,7 +6,7 @@ import PatternTester from "../components/PatternTester.jsx"
 
 
 ## .slimplate.json
-This json object provides a basic schema for the Slimplate CMS. 
+Any project you want to use Slimplate with must have a `.slimplate.json`. This json object provides a basic schema for the Slimplate CMS. 
 
 ```json
 {
@@ -58,7 +58,7 @@ This json object provides a basic schema for the Slimplate CMS.
   * `type` - The field type (defines the widget) 
   * `validators` - is optional and supports `reqired` and `disabled`
 
-### What are Fields?
+### Fields
 
 The fields array in each collection specifies inputs and validators for creating or editing articles. The [AdminEdit](/react-flowbite-github#admin-edit) component uses this information to display corresponding input widgets.
 
@@ -90,7 +90,7 @@ The fields array in each collection specifies inputs and validators for creating
 
 Each `field` can have a specified `type` that determines the type of input widget to be used. If no type is specified, the default is a text input widget. 
 
-#### Default Field Types
+#### types
 
 *   `color`
 *   `date`
@@ -99,7 +99,7 @@ Each `field` can have a specified `type` that determines the type of input widge
 *   `richtext`
 
 
-### What are Widgets?
+### Widgets
 
 Widgets are our way of displaying components for a specific field-type. Widgets can be added through the [SlimplateProvider](/react-flowbite-github#slimplateprovider).
 
@@ -132,7 +132,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-#### Custom Widgets
+#### Customize
 
 You can add your own named widgets, like this:
 
