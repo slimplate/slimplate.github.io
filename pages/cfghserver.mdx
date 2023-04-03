@@ -2,14 +2,12 @@
 slug: cfghserver
 title: cfghserver
 ---
-
-
-## Introduction
+## Introductions
 
 This is a Cloudflare worker that serves two main purposes:
 
-1. Provide OAuth callbacks for GitHub authentication.
-2. Proxy authenticated requests for GitHub files.
+1.  Provide OAuth callbacks for GitHub authentication.
+2.  Proxy authenticated requests for GitHub files.
 
 If you're interested in a Vercel version, check out [slimplate-next-template](https://github.com/slimplate/slimplate-next-template), which has this backend, as well as a frontend that uses it. You can also check out the files for this Cloudflare worker [here](https://github.com/slimplate/cfghserver).
 
@@ -17,24 +15,23 @@ If you're interested in a Vercel version, check out [slimplate-next-template](ht
 
 To set up authentication, follow these steps:
 
-1. Add a GitHub OAuth app under "Developer Settings" and set the redirect URL to wherever this Cloudflare worker is deployed (`https://cfghserver.YOURNAME.workers.dev/api/github/callback`).
+1.  Add a GitHub OAuth app under "Developer Settings" and set the redirect URL to wherever this Cloudflare worker is deployed (`https://cfghserver.YOURNAME.workers.dev/api/github/callback`).
 
-2. Edit `secrets.json` to include the following details:
+2.  Edit `secrets.json` to include the following details:
 
-   ```json
-   {
-     "GITHUB_CLIENT": "YOUR_GITHUB_CLIENT",
-     "GITHUB_SECRET": "YOUR_GITHUB_SECRET",
-     "REDIRECT_URLS": "http://localhost:5173/"
-   }
-Note that REDIRECT_URLS is a comma-separated list of authorized URLs to redirect to with the OAuth token. It does not have to match GitHub's redirect URL.
+    ```json
+    {
+      "GITHUB_CLIENT": "YOUR_GITHUB_CLIENT",
+      "GITHUB_SECRET": "YOUR_GITHUB_SECRET",
+      "REDIRECT_URLS": "http://localhost:5173/"
+    }
+    ```
 
+Note that REDIRECT\_URLS is a comma-separated list of authorized URLs to redirect to with the OAuth token. It does not have to match GitHub's redirect URL.
 
-3. Run `npm run deploy` for initial deployment.
-
-4. Run `wrangler secret:bulk secrets.json` to push your secrets to the Cloudflare worker.
-
-5. In your app, hit `https://cfghserver.YOURNAME.workers.dev/api/github?code=XXXX&redir=http%3A%2F%2Flocalhost%3A5173%2F&scope=WHATEVER` to get the OAuth token (in the `gh` query parameter). The code parameter comes from the OAuth flow for the user. You can read more about it here.
+3.  Run `npm run deploy` for initial deployment.
+4.  Run `wrangler secret:bulk secrets.json` to push your secrets to the Cloudflare worker.
+5.  In your app, hit `https://cfghserver.YOURNAME.workers.dev/api/github?code=XXXX&redir=http%3A%2F%2Flocalhost%3A5173%2F&scope=WHATEVER` to get the OAuth token (in the `gh` query parameter). The code parameter comes from the OAuth flow for the user. You can read more about it here.
 
 You can see an example of using this for GitHub login [here](https://github.com/slimplate/slimplate-next-template).
 
