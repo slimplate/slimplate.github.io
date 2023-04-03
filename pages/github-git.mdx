@@ -3,9 +3,20 @@ slug: github-git
 title: Github Git
 ---
 
-## Installation
+## Introduction
 
-Represents a single git repo, in browser, from Github 
+If you want to interact with a single GitHub project or collection using JavaScript, you can use the `GithubProject` class. This class allows you to read, write, and delete files from a GitHub repository using the `isomorphic-git` library.
+
+To use the `GithubProject` class, you need to provide several parameters to the constructor, including:
+
+- File system
+- Repository information
+- Branch name
+- GitHub access token
+
+Additionally, the `GithubProject` class includes a default `corsProxy` parameter to handle any CORS-related issues that may arise.
+
+## Installation
 
 ```npm
 npm i slimplate/github-git
@@ -17,7 +28,20 @@ import GithubProject from '@slimplate/github-git'
 ```
   
 ```jsx
-  const git = new GithubProject(fs, repo, branch, token, user, undefined, corsProxy)
+  import fs from 'fs'
+  import GithubProject from '@slimplate/github-git'
+
+  const repo = {
+    full_name: 'my-org/my-repo'
+  }
+
+  const branch = 'main'
+  const token = 'my-github-access-token'
+  const user = 'my-github-username'
+  const repoUrl = `https://github.com/${repo.full_name}.git`
+  const corsProxy = 'https://cors.isomorphic-git.org'
+
+  const git = new GithubProject(fs, repo, branch, token, user, repoUrl, corsProxy)
   await git.init()
 ```
   Check out the `GithubProject` code [here](https://github.com/slimplate/slimplate/blob/main/packages/github-git/src/index.js)

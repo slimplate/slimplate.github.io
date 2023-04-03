@@ -77,6 +77,6 @@ const collection = {
   date: '03-30-2023',
   slug: 'cool-article'
 }
-const text = tt(`/content/blog/${date}-${slug}.md`, { ...collection })
-console.log(text) // /content/blog/03-30-2023-cool-article.md 
+const filepath = tt(`/content/blog/${date}-${slug}.md`, { ...collection })
+console.log(filepath) // /content/blog/03-30-2023-cool-article.md 
 ```

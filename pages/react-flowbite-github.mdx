@@ -4,7 +4,7 @@ slug: react-flowbite-github
 ---
 ## Introduction
 
-This is our library of useful react components, hooks, providers and widgets. Feel free to checkout our demo [here](https://github.com/slimplate/slimplate-next-template).
+This is our library of useful react components, hooks, providers and widgets. Feel free to checkout our demo [here](https://github.com/slimplate/slimplate-next-template) or the repo [here](https://github.com/slimplate/slimplate/tree/main/packages/react-flowbite-github).
 
 ## Installation
 
@@ -107,8 +107,8 @@ function PageDashboard () {
 Uses the `useSlimplate` hook to obtain the `projects` and `status` variables. It also performs a one-time setup of the GithHub repository for the specified userName and projectName.
 
 **Props**
-  * `enableSync` - Enable the sync button 
-  * `onSelect` - Callback when the project is clicked
+  * `enableSync` - Enable the sync button .
+  * `onSelect` - Callback when the project is clicked.
 
 
 ### AdminProjectMulti
@@ -116,7 +116,7 @@ Uses the `useSlimplate` hook to obtain the `projects` and `status` variables. It
 The component renders a table of project information that is obtained from the projects object. It also includes a button that opens a modal to create a new project, and buttons to delete, sync, and view a project on GitHub. The onSelect function is used to handle clicks on project rows.
 
 **Props**
-  * `onSelect` - Callback when the project is clicked
+  * `onSelect` - Callback when the project is clicked.
 
 ### Admin Collection
 
@@ -140,9 +140,9 @@ function PageCollection ({ params: { username, projectName, branch } }) {
 ```
 
 **Props**
-  * `onSelect` - Callback when the project is clicked
+  * `onSelect` - Callback when the project is clicked.
   * `projectName` - The Project name.
-  * `enableSync` - Should show sync button
+  * `enableSync` - Should show sync button.
 
 ### Admin Content
 
@@ -269,8 +269,8 @@ return (
 ```
 
 **Props**
-  * `show` - display the modal
-  * `onCancel` - callback when the modal is closed
+  * `show` - display the modal.
+  * `onCancel` - callback when the modal is closed.
 
 ### Modal Dialog Delete
 
@@ -301,10 +301,10 @@ return (
 ```
 
 **Props**
-  * `show` - display the modal
-  * `onCancel` - callback when the modal is closed
-  * `onConfirm` - callback when the modal is confirmed
-  * `text` - prompt to display to user
+  * `show` - display the modal.
+  * `onCancel` - callback when the modal is closed.
+  * `onConfirm` - callback when the modal is confirmed.
+  * `text` - prompt to display to user.
 
 
 
@@ -325,9 +325,9 @@ function MyThing() {
 ```
 
 **variables**
-  * `widgets` - [Widgets](/configuration#what-are-widgets) object
-  * `status` - Status object for local filesystem compared to remote
-  * `user` - Github user
+  * `widgets` - [Widgets](/configuration#what-are-widgets) object.
+  * `status` - Status object for local filesystem compared to remote.
+  * `user` - Github user.
   * `fs` - The local file system.
   * `setUser` - Setter for the user.
   * `token` - The GitHub token.
@@ -341,7 +341,7 @@ function MyThing() {
 
 
 ### useLocalStorage
-Hook that works simialr to useState, but persists in localStorage
+Hook that works simialr to useState, but persists in localStorage.
 
 ```jsx
 import { useLocalStorage } from '@slimplate/react-flowbite-github'
@@ -350,7 +350,7 @@ const [user, setUser] = useLocalStorage('user', false)
 ```
 
 ### useFsUser
-Hook that works simialr to useState, but use JSON file in virtual filesystem
+Hook that works simialr to useState, but use JSON file in virtual filesystem.
 
 ```jsx
 import { useFsUser } from '@slimplate/react-flowbite-github'

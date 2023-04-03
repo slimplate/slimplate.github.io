@@ -6,22 +6,26 @@ title: Admin Static
 
 ### Introduction
 
-This is an example project using [vite](https://vitejs.dev/) & [react](https://reactjs.org/) with the UI in [tailwind](https://tailwindcss.com/)/[flowbite](https://flowbite.com/).
+This is an example project that uses [vite](https://vitejs.dev/) & [react](https://reactjs.org/) with the UI in [tailwind](https://tailwindcss.com/)/[flowbite](https://flowbite.com/).
 
-Think of this as the central CMS admin for a bunch of [slimplate](https://github.com/slimplate) sites you have in github. It allows you to keep your content in github, and edit it, without a server-side component (you still need a CORS proxy, but that is it.)
+The project aims to provide a central content management system (CMS) admin for multiple [slimplate](https://github.com/slimplate) sites that you have on GitHub. The project allows you to keep your content on GitHub and edit it without requiring a server-side component, except for a Cross-Origin Resource Sharing (CORS) proxy, which is necessary.
 
-#### setup
+### Setup
 
-Deploy [cfghserver](https://github.com/slimplate/cfghserver) on cloudflare, or similar to [this](https://github.com/slimplate/slimplate-next-template/tree/main/pages/api) on vercel. it has a little setup in the README. This will handle github authentication & provide a CORS proxy.
+To set up the project, follow these steps:
 
-Install deps with `npm i`
+1. Deploy [cfghserver](https://github.com/slimplate/cfghserver) on cloudflare, or similar to [this](https://github.com/slimplate/slimplate-next-template/tree/main/pages/api) on vercel. Refer to the README file for instructions on how to set it up. This will handle GitHub authentication and provide a CORS proxy.
 
-Add a line to .env that points to it:
+2. Install dependencies using the command `npm i`.
+
+3. Add a line to the `.env` file that points to the deployed cfghserver instance:
 
 ```
 VITE_GITHUB_BACKEND=https://mycfghserver.gummicube.workers.dev
 ```
 
-Test locally with `npm start`
+4. Test the project locally using the command `npm start`.
 
-Deploy with `npm run deploy`.
+5. Deploy the project using the command `npm run deploy`.
+
+By following these steps, you will have set up the project and be ready to use it as a central CMS admin for your GitHub-hosted slimplate sites.
