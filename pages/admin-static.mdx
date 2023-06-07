@@ -2,9 +2,9 @@
 slug: admin-static
 title: Admin Static
 ---
-
-
 ### Introduction
+
+test
 
 This is an example project that uses [vite](https://vitejs.dev/) & [react](https://reactjs.org/) with the UI in [tailwind](https://tailwindcss.com/)/[flowbite](https://flowbite.com/).
 
@@ -14,18 +14,15 @@ The project aims to provide a central content management system (CMS) admin for 
 
 To set up the project, follow these steps:
 
-1. Deploy [cfghserver](https://github.com/slimplate/cfghserver) on cloudflare, or similar to [this](https://github.com/slimplate/slimplate-next-template/tree/main/pages/api) on vercel. Refer to the README file for instructions on how to set it up. This will handle GitHub authentication and provide a CORS proxy.
+1.  Deploy [cfghserver](https://github.com/slimplate/cfghserver) on cloudflare, or similar to [this](https://github.com/slimplate/slimplate-next-template/tree/main/pages/api) on vercel. Refer to the README file for instructions on how to set it up. This will handle GitHub authentication and provide a CORS proxy.
+2.  Install dependencies using the command `npm i`.
+3.  Add a line to the `.env` file that points to the deployed cfghserver instance:
 
-2. Install dependencies using the command `npm i`.
+<!---->
 
-3. Add a line to the `.env` file that points to the deployed cfghserver instance:
+    VITE_GITHUB_BACKEND=https://mycfghserver.gummicube.workers.dev
 
-```
-VITE_GITHUB_BACKEND=https://mycfghserver.gummicube.workers.dev
-```
-
-4. Test the project locally using the command `npm start`.
-
-5. Deploy the project using the command `npm run deploy`.
+4.  Test the project locally using the command `npm start`.
+5.  Deploy the project using the command `npm run deploy`.
 
 By following these steps, you will have set up the project and be ready to use it as a central CMS admin for your GitHub-hosted slimplate sites.
